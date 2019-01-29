@@ -2,33 +2,41 @@
 
 namespace Libellule\Core;
 
+use App\Controller\FrontController;
+use Libellule\Router\Router;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class Core
 {
+    private $router, $request;
+
+    /**
+     * Core constructor.
+     * Au moment ou mon application s'initialise, mon
+     * router lui aussi au meme moment s'initialise avec
+     * les routes provenants de config.php.
+     * @param array $l_routes Tableau des Routes de mon App.
+     */
+    public function __construct(array $l_routes)
+    {
+        $this->router =  new Router($l_routes);
+    }
+
     public function handle(Request $request): Response
     {
         # Aperçu de Request
         # dump($request);
 
-        # Récupération des paramètres avecf Request
-        $controller = $request->get('controller');
-        $action = $request->get('action');
+        $this->request = $request;
 
-        if($controller == "front" && $action == "index") {
-            # echo "<h1>JE SUIS SUR LA PAGE D'ACCUEIL</h1>";
-            return new Response("<h1>JE SUIS SUR LA PAGE D'ACCUEIL</h1>");
-        }
+        /**
+         *  On appel la fonction matcher pour rechercher
+         * une correspondance entre l'URL de la requète
+         * et le tableau de routes. Puis on retourne la
+         * réponse correspondante.
+         */
+        return $this->router->matcher($request);
 
-        if($controller == "front" && $action == "categorie") {
-            # echo "<h1>JE SUIS SUR LA PAGE CATEGORIE</h1>";
-            return new Response("<h1>JE SUIS SUR LA PAGE CATEGORIE</h1>");
-        }
-
-        if($controller == "front" && $action == "article") {
-            # echo "<h1>JE SUIS SUR LA PAGE ARTICLE</h1>";
-            return new Response("<h1>JE SUIS SUR LA PAGE ARTICLE</h1>");
-        }
     }
 }

@@ -6,11 +6,15 @@ use Symfony\Component\HttpFoundation\Request;
 # 1. Chargement de l'autoload de composer.
 require __DIR__.'/../vendor/autoload.php';
 
-# 2. Récupération de la Global Request
+# 2a. Récupération de la Global Request
 $request = Request::createFromGlobals();
 
+# 2b. Récupération de la configuration
+# TODO : Vérifiez si la configuration existe. (Fichier + Tableau)
+require '../config/config.php';
+
 # 3. Initialisation de l'Application
-$core = new Core();
+$core = new Core($l_routes);
 
 # 4. Traitement de la requète de l'utilisateur
 $response = $core->handle($request);
