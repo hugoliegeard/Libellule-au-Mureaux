@@ -47,7 +47,7 @@ class Router
         if($match) {
 
             # Vérification du match
-            dump($match);
+            #dump($match);
 
             $target = explode('::', $match['target']);
             $controller = new $target[0];

@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 
+use Libellule\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-class FrontController
+class FrontController extends AbstractController
 {
 
     /**
@@ -14,7 +15,7 @@ class FrontController
      */
     public function homeAction()
     {
-        return new Response("<h1>JE SUIS SUR LA PAGE D'ACCUEIL</h1>");
+        return $this->render('front/home.html.twig');
     }
 
     /**
@@ -24,7 +25,7 @@ class FrontController
      */
     public function categorieAction($categorie)
     {
-        return new Response("<h1>JE SUIS SUR LA PAGE CATEGORIE : $categorie</h1>");
+        return $this->render('front/categorie.html.twig');
     }
 
     /**
@@ -33,6 +34,6 @@ class FrontController
      */
     public function articleAction()
     {
-        return new Response("<h1>JE SUIS SUR LA PAGE ARTICLE</h1>");
+        return $this->render('front/article.html.twig');
     }
 }
