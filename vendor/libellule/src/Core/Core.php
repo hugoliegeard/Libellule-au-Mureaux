@@ -3,7 +3,9 @@
 namespace Libellule\Core;
 
 use Libellule\Core\Container\Container;
+use Libellule\Model\ObjectManager;
 use Libellule\Router\Router;
+use Libellule\Twig\TwigExtension\LibelluleTwigExtension;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig_Environment;
@@ -11,7 +13,7 @@ use Twig_Loader_Filesystem;
 
 class Core
 {
-    private $l_routes, $container;
+    private $l_routes, $l_database, $container;
 
     /**
      * Core constructor.
@@ -19,11 +21,13 @@ class Core
      * router lui aussi au meme moment s'initialise avec
      * les routes provenants de config.php.
      * @param array $l_routes Tableau des Routes de mon App.
+     * @param string $l_database
      */
-    public function __construct(array $l_routes)
+    public function __construct(array $l_routes, string $l_database)
     {
-        # Chargement des routes
+        # Chargement de la configuration des routes et de la BDD
         $this->l_routes = $l_routes;
+        $this->l_database = $l_database;
 
         # Chargement du Container
         $this->container = Container::getInstance();
@@ -44,13 +48,28 @@ class Core
      * Initialisation de la configuration de Twig
      * TODO : Ajouter la détection de l'environnement pour le cache
      */
-    public function initializeTwig()
+    public function initializeTwig(string $baseUrl)
     {
         $loader = new Twig_Loader_Filesystem($this->getTemplateDir());
         $twig = new Twig_Environment($loader, [
             'cache' => false,
         ]);
+        $twig->addExtension(new LibelluleTwigExtension($baseUrl));
         $this->container->set('twig', $twig);
+    }
+
+    /**
+     * Initialisation de Doctrine
+     */
+    private function initializeDoctrine()
+    {
+        $config = new \Doctrine\DBAL\Configuration();
+        $connectionParams = array(
+            'url' => $this->l_database,
+        );
+        $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+        $this->container->set('doctrine', $conn);
+        $this->container->set('object_manager', new ObjectManager());
     }
 
     /**
@@ -62,7 +81,10 @@ class Core
         $this->initializeRouter($this->l_routes);
 
         # Initialisation de Twig
-        $this->initializeTwig();
+        $this->initializeTwig($this->container->get('request')->getBaseUrl());
+
+        # Initialisation de Doctrine
+        $this->initializeDoctrine();
     }
 
     public function handle(Request $request): Response

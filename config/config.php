@@ -18,3 +18,6 @@
         ['GET', '/editer-un-article/[i:id].html', 'App\Controller\ArticleController::editAction', 'article_edit'],
     ];
 
+    # Connexion à la BDD
+    $l_database = 'mysql://root:@localhost/technews';
+

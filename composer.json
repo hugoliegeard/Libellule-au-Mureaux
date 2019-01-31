@@ -20,7 +20,10 @@
         "symfony/http-foundation": "^4.2",
         "altorouter/altorouter": "^1.2",
         "twig/twig": "^2.0",
-        "tightenco/collect": "^5.7"
+        "tightenco/collect": "^5.7",
+        "doctrine/dbal": "^2.9",
+        "zendframework/zend-hydrator": "^3.0",
+        "zendframework/zend-db": "^2.9"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2"

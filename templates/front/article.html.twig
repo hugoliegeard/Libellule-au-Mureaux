@@ -28,7 +28,7 @@
 
 
                 <div class="post-detail-img">
-                    <img alt="" src="images/product/4.jpg" />
+                    <img alt="" src="{{ asset('images/product/4.jpg') }}" />
                 </div>
                 <p class="quote">Sed porttitor lectus nibh. Sed porttitor lectus nibh. Sed porttitor lectus nibh. Quisque velit nisi, pretium ut lacinia in, elementum id enim.</p>
 
@@ -37,7 +37,7 @@
                 <h4>Nulla porttitor accumsan tincidunt.</h4>
 
                 <p>
-                    <img alt="" src="images/product/2.jpg" class="post-detail-img-left" />
+                    <img alt="" src="{{ asset('images/product/2.jpg') }}" class="post-detail-img-left" />
 
                     Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Nulla porttitor accumsan tincidunt. Donec rutrum congue leo eget malesuada. Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada. Cras ultricies ligula sed magna dictum porta. Cras ultricies ligula sed magna dictum porta. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Sed porttitor lectus nibh. Quisque velit nisi, pretium ut lacinia in, elementum id enim.
                 </p>
@@ -95,7 +95,7 @@
                         <div class="spotlight-item-thumb">
                             <div class="spotlight-item-thumb-img">
                                 <a href="#">
-                                    <img alt="" src="images/product/3.jpg">
+                                    <img alt="" src="{{ asset('images/product/3.jpg') }}">
                                 </a>
                                 <a href="#" class="cate-tag">business</a>
                             </div>
@@ -115,7 +115,7 @@
                         <div class="spotlight-item-thumb">
                             <div class="spotlight-item-thumb-img">
                                 <a href="#">
-                                    <img alt="" src="images/product/4.jpg">
+                                    <img alt="" src="{{ asset('images/product/4.jpg') }}">
                                 </a>
                                 <a href="#" class="cate-tag">Computing</a>
                             </div>
@@ -135,7 +135,7 @@
                         <div class="spotlight-item-thumb">
                             <div class="spotlight-item-thumb-img">
                                 <a href="#">
-                                    <img alt="" src="images/product/5.jpg">
+                                    <img alt="" src="{{ asset('images/product/5.jpg') }}">
                                 </a>
                                 <a href="#" class="cate-tag">Tech</a>
                             </div>
@@ -154,6 +154,7 @@
                 </div>
             </section>
         </div>
+        {% include 'components/_sidebar.html.twig' %}
     </div>
 {% endblock %}
 

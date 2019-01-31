@@ -14,7 +14,7 @@ $request = Request::createFromGlobals();
 require '../config/config.php';
 
 # 3. Initialisation de l'Application
-$core = new Core($l_routes);
+$core = new Core($l_routes, $l_database);
 
 # 4. Traitement de la requète de l'utilisateur
 $response = $core->handle($request);

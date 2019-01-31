@@ -61,5 +61,16 @@ class Router
             return new Response('Erreur 404', Response::HTTP_NOT_FOUND);
         }
     }
-    
+
+    /**
+     * Permet la génération des Urls
+     * @param string $routeName
+     * @param array $params
+     * @return string
+     */
+    public function generateUrl(string $routeName, array $params)
+    {
+        return $this->router->generate($routeName, $params);
+    }
+
 }

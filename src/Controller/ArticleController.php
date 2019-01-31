@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use Libellule\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController
